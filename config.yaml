@@ -38,7 +38,7 @@
     #
     # [pt_BR] Intervalo de tempo para verificar se precisa resolver o captcha.
     # Valor padrão (em minutos): 1
-    check_for_captcha: 1
+    check_for_captcha: 1000
 
     # [en_US] Time interval to check for login request
     # Default value (in minutes): 3
@@ -52,7 +52,7 @@
     #
     # [pt_BR] Intervalo de tempo entre movimentos
     # Valor padrão (em segundos): 1
-    interval_between_moviments: 1
+    interval_between_moviments: 0.5
 
   # [en_US] How confident the bot needs to be to click the buttons (values from 0 to 1. 0 is the minimum value, 1 is the maximum value)
   #
@@ -128,7 +128,7 @@
   #
   # [pt_BR]
   # Valor padrão: 200
-  click_and_drag_amount: 200
+  click_and_drag_amount: 320
 
   # [en_US]
   # Default value: green

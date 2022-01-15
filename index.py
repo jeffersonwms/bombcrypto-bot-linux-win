@@ -48,11 +48,6 @@ cat = """
 ========== 💰 Have I helped you in any way? All I ask is a tip! 🧾 ======
 ========== ✨ Faça sua boa ação de hoje, manda aquela gorjeta! 😊 =======
 =========================================================================
-======================== vvv BCOIN BUSD BNB vvv =========================
-============== 0x1305EE0e2a22070EfB7aF35e567f7Fa370D5F302 ===============
-=========================================================================
-===== https://nubank.com.br/pagar/1nb7na/SvujVdhX49 ======
-=========================================================================
 
 >>---> Press ctrl + c to kill the bot.
 
@@ -143,7 +138,7 @@ def run_chrome():
     driver.switch_to.window(driver.window_handles[1])
     driver.get('https://app.bombcrypto.io/webgl/index.html')
 
-    time.sleep(5)
+    time.sleep(1)
 
     buttons = ["wallet", "connect-wallet", "connect", "select-wallet-2", "confirm"]
     for button in buttons:
@@ -201,7 +196,7 @@ def addRandomness(n, randomn_factor_size=None):
 
 
 def moveToWithRandomness(x, y, t):
-    pyautogui.moveTo(addRandomness(x, 10), addRandomness(y, 10), t + random() / 2)
+    pyautogui.moveTo(addRandomness(x, 10), addRandomness(y, 10), 0.5 + random() / 2)
 
 
 def remove_suffix(input_string, suffix):
@@ -345,7 +340,7 @@ def scroll():
 
 
 def clickButtons():
-    time.sleep(2)
+    time.sleep(1)
     all_go_work_button = False
     if pyautogui.locateOnScreen(images["all-go-work"]):
         buttons = positions(images['all-go-work'], threshold=ct['all_go_to_work_btn'])
@@ -451,8 +446,7 @@ def goToHeroes():
 
     # TODO tirar o sleep quando colocar o pulling
     # time.sleep(1)
-    if clickBtn(images['hero-icon']):
-        time.sleep(randint(1, 3))
+    clickBtn(images['hero-icon'])
 
 
 def goToGame():
@@ -596,14 +590,14 @@ def refreshHeroes():
 
         if not is_all_go_work:
             scroll()
-            time.sleep(2)
+            time.sleep(1)
 
     logger('💪 {} heroes sent to work'.format(hero_clicks))
     goToGame()
 
 
 def manager(current_window):
-    time.sleep(2)
+    # time.sleep(2)
     now = time.time()
     if now - current_window["check_for_captcha"] > addRandomness(time_out['check_for_captcha'] * 60):
         current_window["check_for_captcha"] = now
@@ -624,7 +618,7 @@ def manager(current_window):
     # clickBtn(teasureHunt)
     logger(None, progress_indicator=True)
     sys.stdout.flush()
-    time.sleep(1)
+    # time.sleep(1)
 
 
 def click_next_tab(current_tab):
@@ -658,7 +652,7 @@ def main():
 
     total_tabs = multiple_tabs["total_tabs"]
     for i in range(total_tabs):
-        webbrowser.open_new("https://app.bombcrypto.io/webgl/index.html")
+        # webbrowser.open_new("https://app.bombcrypto.io/webgl/index.html")
         print(f"Abrindo aba {i} ...")
         time.sleep(2)
 
@@ -687,7 +681,7 @@ def main():
                 click_next_tab(current_tab)
                 current_title = run_command(["xdotool getactivewindow getwindowname"])[0].replace("\n", "")
                 print(current_title)
-            if current_title != "bombcrypto - Google Chrome" and current_title != "bombcrypto - Mozilla Firefox":
+            if current_title != "Bombcrypto - Google Chrome" and current_title != "Bombcrypto - Mozilla Firefox":
                 last_change_tab = now
                 click_next_tab(current_tab)
             else:
@@ -716,8 +710,8 @@ def main():
         if get_platform() == 'Linux':
             time.sleep(1)
             #  Aqui ele percorre as janelas que estiver escrito bombcrypto
-            for window in get_windows_with_title('bombcrypto'):
-                if window["title"] == "bombcrypto" and window["application"] in ['Google Chrome', 'Mozilla Firefox']:
+            for window in get_windows_with_title('Bombcrypto'):
+                if window["title"] == "Bombcrypto" and window["application"] in ['Google Chrome', 'Mozilla Firefox']:
                     windows.append({
                         "window": window,
                         "login": 0,
@@ -737,13 +731,13 @@ def main():
                         if current_window["window"]["is_minimized"]:
                             run_command(["wmctrl", "-ir", f"{current_window['window']['id']}", "-b",
                                          "add,maximized_vert,maximized_horz"])
-                        time.sleep(2)
+                        time.sleep(1)
                         try:
                             run_command(["wmctrl", "-ia", f"{current_window['window']['id']}"])
                         except:
                             print(f"Window {current_window['window']['title']}-{index} is closed!!!")
                             windows.remove(current_window)
-                        time.sleep(5)
+                        time.sleep(1)
                         # run_command(["wmctrl", "-ir", f"{current_window['window']['id']}", "-b",
                         # "remove,maximized_vert,maximized_horz"])
                         print('>>---> Current window: %s-%s' % (current_window['window']['title'], index))
@@ -772,7 +766,7 @@ def main():
                         if not currentWindow["window"].isMaximized:
                             currentWindow["window"].maximize()
                         print('>>---> Current window: %s' % currentWindow["window"].title)
-                        time.sleep(2)
+                        time.sleep(1)
                         manager(currentWindow)
             else:
                 print('>>---> No window with the name bombcrypto was found')
