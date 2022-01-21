@@ -634,6 +634,7 @@ def manager(current_window):
         current_window["new_map"] = now
         if clickBtn(images['new-map']):
             loggerMapClicked()
+            refreshHeroes()
     if now - current_window["refresh_heroes"] > addRandomness(time_out['refresh_heroes_positions'] * 60):
         current_window["refresh_heroes"] = now
         refreshHeroesPositions()
