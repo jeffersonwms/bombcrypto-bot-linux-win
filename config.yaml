@@ -87,6 +87,30 @@
     # Valor padrão: 0.9
     go_to_work_btn: 0.9
 
+    # Total baus roxo
+    # [en_US]
+    # Default value: 0.7
+    #
+    # [pt_BR]
+    # Valor padrão: 0.7
+    bau_roxo: 0.7
+
+    # Total baus roxo
+    # [en_US]
+    # Default value: 0.7
+    #
+    # [pt_BR]
+    # Valor padrão: 0.7
+    bau_gold: 0.7
+
+    # Total baus roxo
+    # [en_US]
+    # Default value: 0.7
+    #
+    # [pt_BR]
+    # Valor padrão: 0.7
+    bau_blue: 0.7
+
     # [en_US]
     # Default value: 0.9
     #

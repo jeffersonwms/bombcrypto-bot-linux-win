@@ -634,6 +634,7 @@ def manager(current_window):
         current_window["new_map"] = now
         if clickBtn(images['new-map']):
             loggerMapClicked()
+            time.sleep(1)
             refreshHeroes()
     if now - current_window["refresh_heroes"] > addRandomness(time_out['refresh_heroes_positions'] * 60):
         current_window["refresh_heroes"] = now
@@ -734,7 +735,7 @@ def main():
             time.sleep(1)
             #  Aqui ele percorre as janelas que estiver escrito bombcrypto
             for window in get_windows_with_title('Bombcrypto'):
-                if window["title"] == "Bombcrypto" and window["application"] in ['Google Chrome', 'Mozilla Firefox']:
+                if window["title"] == "Bombcrypto" and window["application"] in ['Google Chrome', 'Mozilla Firefox', '- Brave']:
                     windows.append({
                         "window": window,
                         "login": 0,
