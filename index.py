@@ -384,7 +384,7 @@ def isWorking(bar, buttons):
     return True
 
 
-def clickGreenBarButtons():
+def clickGreenBarButtons(baus):
     # ele clicka nos q tao trabaiano mas axo q n importa
     offset = 140
 
@@ -400,6 +400,9 @@ def clickGreenBarButtons():
     if len(not_working_green_bars) > 0:
         logger('🆗 %d buttons with green bar detected' % len(not_working_green_bars))
         logger('👆 Clicking in %d heroes' % len(not_working_green_bars))
+
+    if baus <= 1:
+        not_working_green_bars = not_working_green_bars[:2]
 
     # se tiver botao com y maior que bar y-10 e menor que y+10
     hero_clicks_cnt = 0
@@ -554,6 +557,22 @@ def sendHeroesHome():
         else:
             print('hero already home, or home full(no dark home button)')
 
+def checkBaus():
+    logger('🏢 Search for baus to map')
+
+    bausRoxo = positions(images['bau-roxo'], threshold=ct['bau_roxo'])
+    bausGold = positions(images['bau-gold'], threshold=ct['bau_gold'])
+    bausBlue = positions(images['bau-blue'], threshold=ct['bau_blue'])
+
+    logger('🆗 %d baus roxo detected' % len(bausRoxo))
+    logger('🆗 %d baus gold detected' % len(bausGold))
+    logger('🆗 %d baus blue detected' % len(bausBlue))
+
+    global response
+
+    response = len(bausRoxo) + len(bausRoxo) + len(bausRoxo)
+
+    return response
 
 def refreshHeroes():
     logger('🏢 Search for heroes to work')
@@ -561,6 +580,9 @@ def refreshHeroes():
         print('ok button clicked')
         pyautogui.hotkey('ctrl', 'f5')
         time.sleep(1)
+
+    global baus
+    baus = checkBaus()
 
     goToHeroes()
 
@@ -579,7 +601,7 @@ def refreshHeroes():
         if c['select_heroes_mode'] == 'full':
             buttonsClicked = clickFullBarButtons()
         elif c['select_heroes_mode'] == 'green':
-            buttonsClicked = clickGreenBarButtons()
+            buttonsClicked = clickGreenBarButtons(baus)
         else:
             buttonsClicked, is_all_go_work = clickButtons()
 

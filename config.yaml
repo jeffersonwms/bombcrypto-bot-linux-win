@@ -24,7 +24,7 @@
     #
     # [pt_BR] Intervalo de tempo para atualizar a posição dos heróis no mapa
     # Valor padrão (em minutos): 3
-    refresh_heroes_positions: 3
+    refresh_heroes_positions: 2
 
     # [en_US] Time interval to check for new maps
     # Default value (in minutes): 5
@@ -128,7 +128,7 @@
   #
   # [pt_BR]
   # Valor padrão: 200
-  click_and_drag_amount: 320
+  click_and_drag_amount: 200
 
   # [en_US]
   # Default value: green
