@@ -560,19 +560,24 @@ def sendHeroesHome():
 def checkBaus():
     logger('🏢 Search for baus to map')
 
+    bausWood = positions(images['bau-madeira'], threshold=ct['bau_madeira'])
     bausRoxo = positions(images['bau-roxo'], threshold=ct['bau_roxo'])
     bausGold = positions(images['bau-gold'], threshold=ct['bau_gold'])
     bausBlue = positions(images['bau-blue'], threshold=ct['bau_blue'])
 
+    logger('🆗 %d baus wood detected' % len(bausWood))
     logger('🆗 %d baus roxo detected' % len(bausRoxo))
     logger('🆗 %d baus gold detected' % len(bausGold))
     logger('🆗 %d baus blue detected' % len(bausBlue))
 
     global response
 
-    response = len(bausRoxo) + len(bausRoxo) + len(bausRoxo)
+    response = len(bausWood) + len(bausRoxo) + len(bausRoxo) + len(bausRoxo)
 
     return response
+
+def clickFullRest():
+   clickBtn(images['all-rest-button'], timeout=5)
 
 def refreshHeroes():
     logger('🏢 Search for heroes to work')
@@ -580,11 +585,16 @@ def refreshHeroes():
         print('ok button clicked')
         pyautogui.hotkey('ctrl', 'f5')
         time.sleep(1)
+    
+    # hero_clicks = 0
 
     global baus
     baus = checkBaus()
 
     goToHeroes()
+
+    if c['select_heroes_mode'] != "full":
+        clickFullRest()
 
     if c['select_heroes_mode'] == "full":
         logger('⚒️ Sending heroes with full stamina bar to work', 'green')
@@ -597,6 +607,7 @@ def refreshHeroes():
     empty_scrolls_attempts = c['scroll_attemps']
 
     is_all_go_work = None
+    hero_clicks_cnt = 0
     while empty_scrolls_attempts > 0:
         if c['select_heroes_mode'] == 'full':
             buttonsClicked = clickFullBarButtons()
@@ -606,6 +617,11 @@ def refreshHeroes():
             buttonsClicked, is_all_go_work = clickButtons()
 
         sendHeroesHome()
+
+        hero_clicks_cnt += buttonsClicked
+
+        if baus <= 1 and hero_clicks_cnt > 2:
+            break
 
         if buttonsClicked == 0:
             empty_scrolls_attempts -= 1

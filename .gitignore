@@ -12,6 +12,10 @@ test.py
 /logs/logger.log
 logs/
 
+#targets
+/targets
+
+
 # cache
 /src/__pycache__
 /captcha/__pycache__
