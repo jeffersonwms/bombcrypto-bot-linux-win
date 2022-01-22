@@ -591,9 +591,11 @@ def refreshHeroes():
     global baus
     baus = checkBaus()
 
+
+
     goToHeroes()
 
-    if c['select_heroes_mode'] != "full":
+    if baus <= 1:
         clickFullRest()
 
     if c['select_heroes_mode'] == "full":
@@ -620,7 +622,7 @@ def refreshHeroes():
 
         hero_clicks_cnt += buttonsClicked
 
-        if baus <= 1 and hero_clicks_cnt > 2:
+        if baus <= 1 and hero_clicks_cnt > 1:
             break
 
         if buttonsClicked == 0:
