@@ -93,6 +93,14 @@
     #
     # [pt_BR]
     # Valor padrão: 0.7
+    bau_madeira: 0.7
+
+    # Total baus roxo
+    # [en_US]
+    # Default value: 0.7
+    #
+    # [pt_BR]
+    # Valor padrão: 0.7
     bau_roxo: 0.7
 
     # Total baus roxo
@@ -152,7 +160,7 @@
   #
   # [pt_BR]
   # Valor padrão: 200
-  click_and_drag_amount: 200
+  click_and_drag_amount: 300
 
   # [en_US]
   # Default value: green

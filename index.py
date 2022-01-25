@@ -449,7 +449,8 @@ def goToHeroes():
 
     # TODO tirar o sleep quando colocar o pulling
     # time.sleep(1)
-    clickBtn(images['hero-icon'])
+    if clickBtn(images['hero-icon']):
+        time.sleep(0.5 + random() / 2)
 
 
 def goToGame():
@@ -564,15 +565,18 @@ def checkBaus():
     bausRoxo = positions(images['bau-roxo'], threshold=ct['bau_roxo'])
     bausGold = positions(images['bau-gold'], threshold=ct['bau_gold'])
     bausBlue = positions(images['bau-blue'], threshold=ct['bau_blue'])
+    bausChave = positions(images['bau-chave'])
 
     logger('🆗 %d baus wood detected' % len(bausWood))
     logger('🆗 %d baus roxo detected' % len(bausRoxo))
     logger('🆗 %d baus gold detected' % len(bausGold))
     logger('🆗 %d baus blue detected' % len(bausBlue))
+    logger('🆗 %d baus chave detected' % len(bausChave))
+    
 
     global response
 
-    response = len(bausWood) + len(bausRoxo) + len(bausRoxo) + len(bausRoxo)
+    response = len(bausWood) + len(bausRoxo) + len(bausGold) + len(bausBlue) + len(bausChave)
 
     return response
 
@@ -590,8 +594,6 @@ def refreshHeroes():
 
     global baus
     baus = checkBaus()
-
-
 
     goToHeroes()
 
@@ -614,16 +616,16 @@ def refreshHeroes():
         if c['select_heroes_mode'] == 'full':
             buttonsClicked = clickFullBarButtons()
         elif c['select_heroes_mode'] == 'green':
-            buttonsClicked = clickGreenBarButtons(baus)
+             if baus <= 1 and hero_clicks_cnt > 1:
+                break
+             else:
+                buttonsClicked = clickGreenBarButtons(baus)
         else:
             buttonsClicked, is_all_go_work = clickButtons()
 
         sendHeroesHome()
 
         hero_clicks_cnt += buttonsClicked
-
-        if baus <= 1 and hero_clicks_cnt > 1:
-            break
 
         if buttonsClicked == 0:
             empty_scrolls_attempts -= 1
