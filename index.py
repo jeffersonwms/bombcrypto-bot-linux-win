@@ -336,7 +336,7 @@ def scroll():
         pyautogui.scroll(-c['scroll_size'])
     else:
         pyautogui.dragRel(0, -c['click_and_drag_amount'],
-                          duration=1, button='left')
+                          duration=2, button='left')
 
 
 def clickButtons():
