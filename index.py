@@ -196,7 +196,7 @@ def addRandomness(n, randomn_factor_size=None):
 
 
 def moveToWithRandomness(x, y, t):
-    pyautogui.moveTo(addRandomness(x, 10), addRandomness(y, 10), 0.5 + random() / 2)
+    pyautogui.moveTo(addRandomness(x, 10), addRandomness(y, 10), t + random() / 2)
 
 
 def remove_suffix(input_string, suffix):
@@ -340,7 +340,7 @@ def scroll():
 
 
 def clickButtons():
-    time.sleep(1)
+    time.sleep(2)
     all_go_work_button = False
     if pyautogui.locateOnScreen(images["all-go-work"]):
         buttons = positions(images['all-go-work'], threshold=ct['all_go_to_work_btn'])
@@ -450,7 +450,7 @@ def goToHeroes():
     # TODO tirar o sleep quando colocar o pulling
     # time.sleep(1)
     if clickBtn(images['hero-icon']):
-        time.sleep(0.5 + random() / 2)
+        time.sleep(randint(1, 3))
 
 
 def goToGame():
@@ -632,14 +632,14 @@ def refreshHeroes():
 
         if not is_all_go_work:
             scroll()
-            time.sleep(1)
+            time.sleep(2)
 
     logger('💪 {} heroes sent to work'.format(hero_clicks))
     goToGame()
 
 
 def manager(current_window):
-    # time.sleep(2)
+    time.sleep(2)
     now = time.time()
     if now - current_window["check_for_captcha"] > addRandomness(time_out['check_for_captcha'] * 60):
         current_window["check_for_captcha"] = now
@@ -662,7 +662,7 @@ def manager(current_window):
     # clickBtn(teasureHunt)
     logger(None, progress_indicator=True)
     sys.stdout.flush()
-    # time.sleep(1)
+    time.sleep(1)
 
 
 def click_next_tab(current_tab):
@@ -775,13 +775,13 @@ def main():
                         if current_window["window"]["is_minimized"]:
                             run_command(["wmctrl", "-ir", f"{current_window['window']['id']}", "-b",
                                          "add,maximized_vert,maximized_horz"])
-                        time.sleep(1)
+                        time.sleep(2)
                         try:
                             run_command(["wmctrl", "-ia", f"{current_window['window']['id']}"])
                         except:
                             print(f"Window {current_window['window']['title']}-{index} is closed!!!")
                             windows.remove(current_window)
-                        time.sleep(1)
+                        time.sleep(5)
                         # run_command(["wmctrl", "-ir", f"{current_window['window']['id']}", "-b",
                         # "remove,maximized_vert,maximized_horz"])
                         print('>>---> Current window: %s-%s' % (current_window['window']['title'], index))
@@ -810,7 +810,7 @@ def main():
                         if not currentWindow["window"].isMaximized:
                             currentWindow["window"].maximize()
                         print('>>---> Current window: %s' % currentWindow["window"].title)
-                        time.sleep(1)
+                        time.sleep(2)
                         manager(currentWindow)
             else:
                 print('>>---> No window with the name bombcrypto was found')
