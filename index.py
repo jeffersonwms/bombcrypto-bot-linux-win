@@ -336,7 +336,7 @@ def scroll():
         pyautogui.scroll(-c['scroll_size'])
     else:
         pyautogui.dragRel(0, -c['click_and_drag_amount'],
-                          duration=2, button='left')
+                          duration=3, button='left')
 
 
 def clickButtons():
@@ -383,6 +383,32 @@ def isWorking(bar, buttons):
             return False
     return True
 
+def descobreRaridade(bar):
+    commoms = positions(images['commom-text'], threshold=ct['commom'])
+    rares = positions(images['rare-text'], threshold=ct['rare'])
+    super_rares = positions(images['super_rare-text'], threshold=ct['super_rare'])
+
+    y = bar[1]
+
+    for (_, button_y, _, button_h) in commoms:
+        isBelow = y < (button_y + button_h)
+        isAbove = y > (button_y - button_h)
+        if isBelow and isAbove:
+            return 'commom'
+
+    for (_, button_y, _, button_h) in rares:
+        isBelow = y < (button_y + button_h)
+        isAbove = y > (button_y - button_h)
+        if isBelow and isAbove:
+            return 'rare'
+
+    for (_, button_y, _, button_h) in super_rares:
+        isBelow = y < (button_y + button_h)
+        isAbove = y > (button_y - button_h)
+        if isBelow and isAbove:
+            return 'super_rare'
+
+    return 'null'
 
 def clickGreenBarButtons(baus):
     # ele clicka nos q tao trabaiano mas axo q n importa
@@ -394,8 +420,17 @@ def clickGreenBarButtons(baus):
     logger('🆗 %d buttons detected' % len(buttons))
 
     not_working_green_bars = []
+
     for bar in green_bars:
-        if not isWorking(bar, buttons):
+        global deveTrabalhar
+        global raridade
+        raridade = descobreRaridade(bar)
+        deveTrabalhar = 1
+
+        if raridade != 'commom' and raridade != 'rare':
+            deveTrabalhar = 0
+
+        if not isWorking(bar, buttons) and deveTrabalhar == 1:
             not_working_green_bars.append(bar)
     if len(not_working_green_bars) > 0:
         logger('🆗 %d buttons with green bar detected' % len(not_working_green_bars))
