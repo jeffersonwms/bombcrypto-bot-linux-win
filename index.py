@@ -634,6 +634,7 @@ def refreshHeroes():
 
     if baus <= 1:
         clickFullRest()
+        time.sleep(1)
 
     if c['select_heroes_mode'] == "full":
         logger('⚒️ Sending heroes with full stamina bar to work', 'green')
