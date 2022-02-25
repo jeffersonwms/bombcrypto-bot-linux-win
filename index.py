@@ -422,15 +422,15 @@ def clickGreenBarButtons(baus):
     not_working_green_bars = []
 
     for bar in green_bars:
-        global deveTrabalhar
-        global raridade
-        raridade = descobreRaridade(bar)
-        deveTrabalhar = 1
+        # global deveTrabalhar
+        # global raridade
+        # raridade = descobreRaridade(bar)
+        # deveTrabalhar = 1
 
-        if raridade != 'commom' and raridade != 'rare':
-            deveTrabalhar = 0
+        # if raridade != 'commom' and raridade != 'rare':
+        #     deveTrabalhar = 0
 
-        if not isWorking(bar, buttons) and deveTrabalhar == 1:
+        if not isWorking(bar, buttons):
             not_working_green_bars.append(bar)
     if len(not_working_green_bars) > 0:
         logger('🆗 %d buttons with green bar detected' % len(not_working_green_bars))
