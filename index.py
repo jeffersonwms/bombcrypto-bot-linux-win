@@ -325,10 +325,10 @@ def scroll():
     x,y,w,h = commoms[len(commoms)-1]
     moveToWithRandomness(x,y,1)
     """
-    commoms = positions(images['commom-text'], threshold=ct['commom'])
-    if len(commoms) == 0:
+    dividers = positions(images['divider'], threshold = ct['divider'])
+    if len(dividers) == 0:
         return
-    x, y, w, h = commoms[len(commoms) - 1]
+    x, y, w, h = dividers[len(dividers) - 1]
     #
     moveToWithRandomness(x, y, 1)
 
