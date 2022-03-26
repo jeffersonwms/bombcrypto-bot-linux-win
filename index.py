@@ -522,7 +522,7 @@ def login():
         # TODO mto ele da erro e poco o botao n abre
         # time.sleep(10)
     
-    if clickBtn(images['loggin-button'], timeout=10):
+    if clickBtn(images['login-button'], timeout=10):
         logger('🎉 Loggin button detected, logging in!')
         login_attempts += 1
         # print('sign button clicked')
