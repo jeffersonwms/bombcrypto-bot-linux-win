@@ -516,6 +516,12 @@ def login():
         pyautogui.hotkey('ctrl', 'f5')
         return
 
+    if clickBtn(images['connect-wallet'], timeout=10) or clickBtn(images['wallet'], timeout=10):
+        logger('🎉 Connect wallet button detected, logging in!')
+        login_attempts += 1
+        # TODO mto ele da erro e poco o botao n abre
+        # time.sleep(10)
+    
     if clickBtn(images['loggin-button'], timeout=10):
         logger('🎉 Loggin button detected, logging in!')
         login_attempts += 1
@@ -525,13 +531,7 @@ def login():
             # print('sucessfully login, treasure hunt btn clicked')
             login_attempts = 0
         return
-
-    if clickBtn(images['connect-wallet'], timeout=10) or clickBtn(images['wallet'], timeout=10):
-        logger('🎉 Connect wallet button detected, logging in!')
-        login_attempts += 1
-        # TODO mto ele da erro e poco o botao n abre
-        # time.sleep(10)
-    
+        
     if clickBtn(images['button-connect-modal'], timeout = 10):
         logger('👤 Connect button detected in modal login, logging in!')
         login_attempts = login_attempts + 1
