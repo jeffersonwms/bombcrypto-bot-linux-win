@@ -9,7 +9,7 @@ time_intervals:
   #
   #[pt-br] Intervalo de tempo para mudar de aba (ALT + TAB)
   # Valor padrão (em minutos): 2
-  change_tab: 1
+  change_tab: 2
 
   # [en_US] Time interval for check if there are available heroes to work
   # Default value (in minutes): 10
