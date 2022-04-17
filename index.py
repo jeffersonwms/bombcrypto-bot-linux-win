@@ -819,7 +819,7 @@ def main():
             if len(windows) >= 1:
                 print('>>---> %d windows with the name bombcrypto were found' % len(windows))
                 while True:
-                    for index, current_window in enumerate(windows):
+                    for index, current_window in 4:
                         # run_command(["xdotool", "search", "--name", f"{current_window['window']['title']}",
                         # "windowraise"])
                         print("IS_MINIMIZED: ", current_window["window"]["is_minimized"])
