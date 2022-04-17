@@ -716,10 +716,10 @@ def manager(current_window):
     time.sleep(1)
 
 
-def click_next_tab(current_tab = 1):
+def click_next_tab(current_tab):
     pyautogui.keyDown('ctrl')
     time.sleep(.2)
-    pyautogui.press('tab', presses=current_tab, interval=.2)
+    pyautogui.press('tab', interval=.2)
     time.sleep(.2)
     pyautogui.keyUp('ctrl')
 
@@ -819,7 +819,7 @@ def main():
             if len(windows) >= 1:
                 print('>>---> %d windows with the name bombcrypto were found' % len(windows))
                 while True:
-                    for index, current_window in range(4):
+                    for index, current_window in enumerate(windows):
                         # run_command(["xdotool", "search", "--name", f"{current_window['window']['title']}",
                         # "windowraise"])
                         print("IS_MINIMIZED: ", current_window["window"]["is_minimized"])
@@ -837,7 +837,6 @@ def main():
                         # "remove,maximized_vert,maximized_horz"])
                         print('>>---> Current window: %s-%s' % (current_window['window']['title'], index))
                         manager(current_window)
-                        click_next_tab(1)
             else:
                 print('>>---> No window with the name bombcrypto was found')
         elif get_platform() == 'Windows':
