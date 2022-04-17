@@ -716,12 +716,12 @@ def manager(current_window):
     time.sleep(1)
 
 
-def click_next_tab(current_tab):
-    pyautogui.keyDown('alt')
+def click_next_tab(current_tab = 1):
+    pyautogui.keyDown('ctrl')
     time.sleep(.2)
     pyautogui.press('tab', presses=current_tab, interval=.2)
     time.sleep(.2)
-    pyautogui.keyUp('alt')
+    pyautogui.keyUp('ctrl')
 
 
 def main():
@@ -837,6 +837,7 @@ def main():
                         # "remove,maximized_vert,maximized_horz"])
                         print('>>---> Current window: %s-%s' % (current_window['window']['title'], index))
                         manager(current_window)
+                        click_next_tab(1)
             else:
                 print('>>---> No window with the name bombcrypto was found')
         elif get_platform() == 'Windows':
